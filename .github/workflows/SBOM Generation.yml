@@ -1,4 +1,4 @@
-name: SBOM Generation (Debian)
+name: SBOM Generation
 
 on:
   workflow_dispatch:
@@ -14,9 +14,7 @@ jobs:
         run: |
           curl -Lo $RUNNER_TEMP/sbom-tool https://github.com/microsoft/sbom-tool/releases/latest/download/sbom-tool-linux-x64
           chmod +x $RUNNER_TEMP/sbom-tool
-          # Adjust -pn to "Deb" or "Debian" to specify deb package manager
           $RUNNER_TEMP/sbom-tool generate -b . -bc . -pn Deb -pv 1.0.0 -ps Philips_test -nsb https://sbom.philips.com -V Verbose
-
       - name: Upload SBOM Artifact
         uses: actions/upload-artifact@v4
         with:
